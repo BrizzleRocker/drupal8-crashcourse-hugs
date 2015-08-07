@@ -1,0 +1,7 @@
+hugs.hug:
+    path: '/hug/{from}/{to}'
+    defaults:
+        _controller: '\Drupal\hugs\Controller\HugsController::hug'
+        _title: 'Hug!'
+    requirements:
+        _permission: 'access content'
