@@ -1,7 +1,17 @@
 hugs.hug:
-    path: '/hug/{from}/{to}'
+    path: '/hug/{from}/{to}/{count}'
     defaults:
         _controller: '\Drupal\hugs\Controller\HugsController::hug'
         _title: 'Hug!'
+        count: 0
     requirements:
         _permission: 'access content'
+        count: \d+
+        
+hugs.config:
+  path: '/admin/config/system/hugs'
+  defaults:
+    _form: 'Drupal\hugs\Form\ConfigForm'
+    _title: 'Hug configuration'
+  requirements:
+    _permission: 'configure_hugs'        

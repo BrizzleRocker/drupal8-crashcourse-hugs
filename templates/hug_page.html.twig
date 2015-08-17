@@ -1,5 +1,7 @@
 <section>
   {% trans %}
-    <strong>{{ from }}</strong> hugs <em>{{ to }}</em>
+    <strong>{{ from }}</strong> hugs <em>{{ to }}</em> once.
+  {% plural count %}
+    <strong>{{ from }}</strong> hugs <em>{{ to }}</em> {{ count }} times.
   {% endtrans %}
 </section>

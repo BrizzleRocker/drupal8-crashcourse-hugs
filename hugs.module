@@ -2,7 +2,7 @@
 
 function hugs_theme() {
   $theme['hug_page'] = [
-    'variables' => ['from' => NULL, 'to' => NULL],
+    'variables' => ['from' => NULL, 'to' => NULL, 'count' => NULL],
     'template' => 'hug_page',
   ];
 
