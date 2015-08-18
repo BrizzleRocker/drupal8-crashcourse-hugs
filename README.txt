@@ -1,4 +1,4 @@
-~~~ Welcome to the stupidest module ever created ~~~
+~~~ Welcome to the silliest module ever created ~~~
 
 Hugs is a Drupal 8 learning exercise based on the presentation from DrupalCon Amsterdam 2014
 'Drupal 8: Crash Course'
