@@ -8,8 +8,10 @@
 namespace Drupal\hugs\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\hugs\HugTracker;
-
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Reports on hugability status with Tracking information
@@ -39,13 +41,39 @@ class HugStatusTracked extends BlockBase implements ContainerFactoryPluginInterf
       $container->get('hugs.hug_tracker')
     );
   }
-    
+ /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return ['hugs_enabled' => 1];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockForm($form, FormStateInterface $form_state) {
+    $form['enable_hugging'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Hugging enabled'),
+      '#description' => $this->t('Enables or disables the advanced hug message.'),
+      '#default_value' => $this->configuration['hugs_enabled'],
+    ];
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->configuration['hugs_enabled'] = $form_state->getValue('enable_hugging');
+  }
+  
   /**
    * {@inheritdoc}
    */
   public function build() {
     $message = $this->t('No hugs :-(');
-    if ($this->configuration['enabled']) {
+    if ($this->configuration['hugs_enabled']) {
       $message = $this->t('@to was the last person hugged', [
         '@to' => $this->hugTracker->getLastRecipient()
       ]);
