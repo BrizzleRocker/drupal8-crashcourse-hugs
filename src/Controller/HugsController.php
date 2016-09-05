@@ -8,16 +8,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 
 class HugsController extends ControllerBase {
+  /**
+   * @var \Drupal\hugs\HugTracker
+   */
   protected $hugTracker;
-  
+
   public function __construct(HugTracker $tracker) {
     $this->hugTracker = $tracker;
   }
-  
+
   public static function create(ContainerInterface $container) {
     return new static($container->get('hugs.hug_tracker'));
   }
-  
+
   public function hug($to, $from, $count) {
     // implement the hug tracker
     $this->hugTracker->addHug($to);
@@ -53,7 +56,7 @@ class HugsController extends ControllerBase {
         '@name' => $node->getOwner()->label(),
         '@reasons' => implode(', ', $terms),
       ]);
-      
+
       // this should be in a template file!
       return [
         '#title' => $node->label() . ' (' . $node->bundle() . ')',
